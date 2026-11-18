@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="AutomationBot.Application/AutomationBot.Application.csproj" />
+  <Project Path="AutomationBot/AutomationBot.csproj" />
+</Solution>

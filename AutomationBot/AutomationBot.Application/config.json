@@ -1,0 +1,12 @@
+{
+  "instructions": {
+    "obsidian": {
+      "ApplicationPath": "C:\\Users\\artem\\AppData\\Local\\Programs\\Obsidian\\Obsidian.exe",
+      "Templates": {
+        "settings": ".\\templates\\settings.png",
+        "enter_rus": ".\\templates\\enter_rus.png",
+        "enter_eng": ".\\templates\\enter_eng.png"
+      }
+    }
+  }
+}
