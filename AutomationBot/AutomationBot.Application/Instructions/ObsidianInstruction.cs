@@ -1,16 +1,16 @@
-﻿using Application.Configuration;
+﻿using AutomationBot.Application.Configuration;
 using AutomationBot.Commands;
 using AutomationBot.Helpers;
 using AutomationBot.Instructions;
 
-namespace Application.Instructions;
+namespace AutomationBot.Application.Instructions;
 
 /// <summary>
 /// Автоматизация запуска Obsidian (пример)
 /// </summary>
-/// <param name="configuration"></param>
-/// <param name="login"></param>
-/// <param name="password"></param>
+/// <param name="configuration">Класс конфигурации</param>
+/// <param name="login">Логин</param>
+/// <param name="password">Пароль</param>
 public class ObsidianInstruction(ObsidianConfiguration configuration, string login, string password) : InstructionBase()
 {
 	/// <summary>
@@ -31,11 +31,15 @@ public class ObsidianInstruction(ObsidianConfiguration configuration, string log
 		try
 		{
 			_commands.Enqueue(new StartApplicationCommand(_configuration.ApplicationPath));
-			_commands.Enqueue(new RepeatCommand(new ClickOnImageCommand(
-				_configuration.Templates["settings"])));
-			_commands.Enqueue(new RepeatCommand(new ClickOnImageCommand(
-				_configuration.Templates["enter_rus"], _configuration.Templates["enter_eng"])));
-			_commands.Enqueue(new TemplateCommand(() =>
+			_commands.Enqueue(new RepeatUntilSuccessCommand(
+				new ClickOnImageCommand(_configuration.Templates["settings"]),
+				TimeSpan.FromMilliseconds(500))
+			);
+			_commands.Enqueue(new RepeatUntilSuccessCommand(
+				new ClickOnImageCommand(_configuration.Templates["enter_rus"], _configuration.Templates["enter_eng"]),
+				TimeSpan.FromMilliseconds(500))
+			);
+			_commands.Enqueue(new CommonCommand(() =>
 			{
 				Task.Delay(200, cancellationToken);
 				InputHelper.InputSimulator.Keyboard.TextEntry(_login);

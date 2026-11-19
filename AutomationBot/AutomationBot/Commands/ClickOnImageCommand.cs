@@ -7,21 +7,24 @@ using AutomationBot.Managers;
 namespace AutomationBot.Commands;
 
 /// <summary>
-/// Перебирает изображение, пока не будет найдено одно из них
+/// Команда для нажатия на первый совпадающий шаблон
 /// </summary>
 /// <param name="templateImagePaths">Массив путей к изображениям</param>
 public class ClickOnImageCommand(params string[] templateImagePaths) : ICommand
 {
+	/// <summary>
+	/// Массив путей к изображениям
+	/// </summary>
 	private readonly string[] _templateImagePaths = templateImagePaths ?? throw new ArgumentNullException();
 
-	public async Task<bool> Execute(CancellationToken cancellationToken)
+	public async Task<bool> ExecuteAsync(CancellationToken cancellationToken)
 	{
 		var source = ScreenManager.TakeScreenshot().ToImage();
-		foreach (var templateImagePath in _templateImagePaths)
+		foreach (var imagePath in _templateImagePaths)
 		{
-			if (File.Exists(templateImagePath))
+			if (File.Exists(imagePath))
 			{
-				var templateImage = CvInvoke.Imread(templateImagePath).ToImage();
+				var templateImage = CvInvoke.Imread(imagePath).ToImage();
 				var (_, center, coeff) = CoordinatesHelper.FindTemplateCoordinates(source, templateImage);
 
 				if (coeff > AppConstants.MIN_THRESHOLD_COEFF)

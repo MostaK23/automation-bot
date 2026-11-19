@@ -1,5 +1,8 @@
 ﻿namespace AutomationBot.Constants;
 
+/// <summary>
+/// Класс содержащий константы, необходимые для выполнения программы
+/// </summary>
 internal class AppConstants
 {
 	/// <summary>

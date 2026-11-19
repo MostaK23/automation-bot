@@ -4,6 +4,9 @@ using WindowsInput;
 
 namespace AutomationBot.Helpers;
 
+/// <summary>
+/// Класс для работы с вводом с клавиатуры и мыши
+/// </summary>
 public class InputHelper
 {
 	public static readonly InputSimulator InputSimulator = new();

@@ -3,6 +3,11 @@ using System.Diagnostics;
 
 namespace AutomationBot.Commands;
 
+/// <summary>
+/// Команда для запуска исполняемого файла
+/// </summary>
+/// <param name="filePath"></param>
+/// <param name="killOnCancell"></param>
 public class StartApplicationCommand(string filePath, bool killOnCancell = false) : ICommand
 {
 	/// <summary>
@@ -16,7 +21,7 @@ public class StartApplicationCommand(string filePath, bool killOnCancell = false
 	/// </summary>
 	private readonly bool _killOnCancell = killOnCancell;
 
-	public async Task<bool> Execute(CancellationToken cancellationToken)
+	public async Task<bool> ExecuteAsync(CancellationToken cancellationToken)
 	{
 		if (!File.Exists(_filePath))
 			throw new FileNotFoundException("Исполняемый файл не найден по указанному пути.", _filePath);

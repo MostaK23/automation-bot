@@ -5,6 +5,9 @@ using System.Drawing;
 
 namespace AutomationBot.Helpers;
 
+/// <summary>
+/// Класс для работы с координатами
+/// </summary>
 internal class CoordinatesHelper
 {
 	/// <summary>

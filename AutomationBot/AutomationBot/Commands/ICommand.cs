@@ -2,5 +2,5 @@
 
 public interface ICommand
 {
-	Task<bool> Execute(CancellationToken cancellationToken);
+	Task<bool> ExecuteAsync(CancellationToken cancellationToken);
 }

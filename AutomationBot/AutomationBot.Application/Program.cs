@@ -1,7 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
-using Application.Instructions;
-using Application.Configuration;
-using AutomationBot.Helpers;
+﻿using AutomationBot.Application.Configuration;
+using AutomationBot.Application.Instructions;
+using Microsoft.Extensions.Configuration;
 
 var config = new ConfigurationBuilder()
 	.AddJsonFile("config.json")
@@ -14,6 +13,10 @@ using var cts = new CancellationTokenSource();
 cts.CancelAfter(TimeSpan.FromSeconds(20));
 await obsidianInstruction.Execute(cts.Token);
 
+//var wait = new WaitTemplateCommand(
+//	TimeSpan.FromSeconds(10),
+//	templateImagePaths: [obsidianConfig.Templates["settings"], obsidianConfig.Templates["enter_rus"]],
+//	waitAll: true
+//);
 
-//await Task.Delay(1000);
-//InputHelper.InputSimulator.Keyboard.TextEntry("Hello world");
+//var result = await wait.ExecuteAsync(cts.Token);
